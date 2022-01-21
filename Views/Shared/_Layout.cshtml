@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>musiq</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/font/stylesheet.css" type="text/css" charset="utf-8" />
+    <style type="text/css">
+
+        body {
+            font-family: 'comfortaaregular' !important;
+        }
+        h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+            font-family: 'comfortaaregular' !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar fixed-top navbar-expand-sm navbar-toggleable-sm navbar-inverse bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">musiq</a>
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    <ul class="nav navbar-nav flex-grow-1 navbar-left">
+                        @if (Authentication.Instance.isLoggedIn())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-area="" asp-controller="Home" asp-action="Index">
+                                    discover
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <form class="navbar-form" asp-controller="Home" asp-action="Index">
+                                    <div>
+
+                                        <input type="text" style="width:300px; height: 2em; margin-top:0.4em" class="form-control" name="searchString">
+
+                                    </div>
+
+                                </form>
+                            </li>
+
+                        }
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if (Authentication.Instance.isLoggedIn())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-area="" asp-controller="User" asp-action="Details" asp-route-id="@Authentication.Instance.getCurrentUser().UserId">
+                                    @($"@{Authentication.Instance.getCurrentUser().Nickname}")
+                                </a>
+                            </li>
+                        }
+                        @if (Authentication.Instance.isLoggedIn())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-primary" asp-area="" asp-controller="User" asp-action="Logout">logout</a>
+                            </li>
+                        }
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" style="color:black" asp-controller="User" asp-action="Register">register</a>
+                        </li>
+                        @if (!Authentication.Instance.isLoggedIn())
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" style="color:black" asp-area="" asp-controller="User" asp-action="Login">login</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

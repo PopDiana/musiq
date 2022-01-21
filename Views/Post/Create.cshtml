@@ -1,0 +1,49 @@
+﻿@model musiq.Models.Post
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+    <div class="row">
+        <h2 class="text-primary" style="text-align:center; margin-top:3em">Add a post</h2>
+       
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label asp-for="Genre" class="control-label">genre</label>
+                    <input asp-for="Genre" class="form-control" />
+                    <span asp-validation-for="Genre" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label">description (optional)</label>
+                    <textarea  rows="3" asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Lyrics" class="control-label">lyrics (optional)</label>
+                    <textarea rows="5" asp-for="Lyrics" class="form-control"></textarea>
+                    <span asp-validation-for="Lyrics" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <h3 class="text-primary" style="text-align:center"> Upload mp4</h3>
+                    <input type="file" asp-for="File" class="form-control" />
+                    <span asp-validation-for="File" class="text-danger"></span>
+                </div>
+                <h3 style="text-align:center; margin-top:1.5em"> -or- </h3>
+                <div class="form-group">
+                    <h3 class="text-primary" style="text-align:center"> Youtube link</h3>
+                    <input asp-for="YoutubeLink" class="form-control" />
+                    <span asp-validation-for="YoutubeLink" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="text-align:center; margin-top:3em">
+                    <input type="submit" value="submit" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+
+

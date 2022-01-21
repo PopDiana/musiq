@@ -1,0 +1,47 @@
+﻿@model musiq.Models.User
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="row" style="margin-top:4em">
+    <div class="col-md-4">
+
+    </div>
+    <div class="col-md-4">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <h3 style="text-align:center" class="text-primary">Edit profile</h3>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UserId" />
+            <input type="hidden" asp-for="Email" />
+            <div class="form-group">
+                <label asp-for="Nickname" class="control-label">nickname</label>
+                <input asp-for="Nickname" class="form-control" />
+                <span asp-validation-for="Nickname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label">short description</label>
+                <textarea rows="3" asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LikedGenres" class="control-label"> liked genres (spaced with commas)</label>
+                <input asp-for="LikedGenres" class="form-control" />
+                <span asp-validation-for="LikedGenres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">profile picture</label>
+                <input type="file" asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="text-align:center; margin-top:2em">
+                <input type="submit" value="submit" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

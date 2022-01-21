@@ -1,0 +1,56 @@
+﻿@model musiq.Models.User
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="row">
+    <div class="col-md-3">
+    </div>
+
+    <div class="col-md-6 shadowy" style="padding-left:4em; padding-right:4em; border-left: 1px solid #dddddd; border-right: 1px solid #dddddd;">
+
+        <div style="margin-top:5em;"></div>
+        <div style="text-align:center">
+            <img class="avatar-picture shadowy" src="@Url.Content("~/uploads/" + Model.ProfilePicture)" alt="">
+            <h3>@Model.Nickname</h3>
+            <h5><a asp-controller="User" asp-action="Edit" asp-route-id="@Model.UserId" class="text-primary">edit profile</a></h5>
+        </div>
+        <div style="margin-top:2em">@Model.Description</div>
+        <div style="margin-top:2em">
+            <h4>Liked genres:</h4>
+            <div class="text-primary">@Model.LikedGenres</div>
+        </div>
+
+        <div style="margin-top:2em">
+            <h3>Posts <a asp-controller="Post" asp-action="Create" class="text-primary"><b>+</b></a></h3>
+            
+            <div class="row" style="margin-top:2em">
+                @foreach (Post post in Model.Posts)
+                {
+
+                    <div class="col-md-4">
+                        @if (post.YoutubeLink != null)
+                        {
+                            <iframe id="video" src=@($"//www.youtube.com/embed/{post.YoutubeLink.Split('=')[1]}") width="150" height="150" frameborder="0" allowfullscreen></iframe>
+                        }
+                        else
+                        {
+                            <video width="150" height="150" controls>
+                                <source src="@($"~/uploads/{post.Media}")" type="video/mp4">
+                            </video>
+                        }
+                    </div>
+                  
+                  
+
+                }
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+
